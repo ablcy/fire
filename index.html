@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YanFire - FIRE生活推广网站</title>
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #F7C948;
+            --bg: #0D1117;
+            --card-bg: #161B22;
+            --text: #E6EDF3;
+            --text-secondary: #8B949E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* 导航栏 */
+        nav {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,107,53,0.2);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--bg) 0%, #1a2332 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,107,53,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(0,78,137,0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-2%, -2%); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), #ff8c5a);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,107,53,0.4);
+        }
+
+        /* 统计数字 */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 4rem auto 0;
+        }
+
+        .stat-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,107,53,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* 什么是FIRE */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .fire-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .fire-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .fire-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .fire-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .fire-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* 计算器 */
+        .calculator-section {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 2rem auto;
+        }
+
+        .calc-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .calc-tab {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .calc-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .calc-tab:hover:not(.active) {
+            color: var(--text);
+            background: rgba(255,107,53,0.1);
+        }
+
+        .calc-form {
+            display: none;
+        }
+
+        .calc-form.active {
+            display: block;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            padding: 0.8rem 1rem;
+            background: var(--bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), #ff8c5a);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .calculate-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .result-box {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(0,78,137,0.1));
+            border-radius: 16px;
+            border: 1px solid var(--primary);
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-item {
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* 原则区域 */
+        .principles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, var(--card-bg), #1e2530);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,107,53,0.2);
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .principle-card h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .principle-card p {
+            color: var(--text-secondary);
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--card-bg);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .built-by {
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .calculator-section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* FIRE数字展示 */
+        .fire-number {
+            font-family: 'Courier New', monospace;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(247,201,72,0.5);
+        }
+
+        /* 生活成本表格 */
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .cost-table th, .cost-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cost-table th {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cost-table td:last-child {
+            text-align: right;
+            color: var(--accent);
+        }
+
+        /* 月度预算图表 */
+        .budget-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.5rem;
+            height: 200px;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+
+        .budget-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary), var(--accent));
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .budget-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        /* 进度条 */
+        .progress-container {
+            margin-top: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+
+        /* 行动呼吁 */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(0,78,137,0.1));
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* 资源列表 */
+        .resource-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .resource-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .resource-item:hover {
+            border-color: var(--primary);
+        }
+
+        .resource-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .resource-icon {
+            font-size: 1.5rem;
+        }
+
+        .resource-name {
+            font-weight: 600;
+        }
+
+        .resource-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Yan<span>Fire</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">什么是FIRE</a></li>
+                <li><a href="#types">FIRE类型</a></li>
+                <li><a href="#calculator">计算器</a></li>
+                <li><a href="#principles">核心原则</a></li>
+                <li><a href="#resources">资源</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content animate-in">
+            <h1>YanFire</h1>
+            <p class="tagline">Financial Independence, Retire Early</p>
+            <p>探索财务自由的秘密，用智慧和规划提前拥抱理想生活。<br>FIRE不是放弃工作，而是让工作成为可选项。</p>
+            <a href="#calculator" class="cta-button">开始计算你的FIRE数字</a>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">25x</div>
+                    <div class="stat-label">年支出 × 25 = FIRE数字</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4%</div>
+                    <div class="stat-label">安全提取率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">自由的可能</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 什么是FIRE -->
+    <section class="section" id="about">
+        <h2 class="section-title">什么是 FIRE？</h2>
+        <p class="section-subtitle">财务独立，提前退休 — 一种颠覆传统人生轨迹的生活方式</p>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem;">
+                FIRE (Financial Independence, Retire Early) 起源于美国，是一种通过<strong style="color: var(--primary);">提高储蓄率</strong>、<strong style="color: var(--primary);">理性投资</strong>和<strong style="color: var(--primary);">极简生活</strong>来实现提前退休的生活运动。
+            </p>
+
+            <div style="background: var(--card-bg); padding: 2rem; border-radius: 16px; border-left: 4px solid var(--primary);">
+                <h3 style="color: var(--primary); margin-bottom: 1rem;">💡 核心公式</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                    <strong>FIRE数字 = 年支出 × 25</strong>
+                </p>
+                <p style="color: var(--text-secondary);">
+                    这个公式基于"4%法则"——如果你积累了足够支撑年支出25倍的资产，即使每年提取4%，也能维持生活，直到永远。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FIRE类型 -->
+    <section class="section" id="types">
+        <h2 class="section-title">FIRE 的四种形态</h2>
+        <p class="section-subtitle">找到属于你的FIRE路径</p>
+
+        <div class="fire-types">
+            <div class="fire-card">
+                <h3>🔥 Lean FIRE</h3>
+                <p>极简FIRE，通过大幅降低支出来减少所需的FIRE数字。适合追求极度简约生活、愿意在物质上做出重大让步的人。特点是低消费、高储蓄率。</p>
+            </div>
+
+            <div class="fire-card">
+                <h3>💎 Fat FIRE</h3>
+                <p>富裕FIRE，保持现有或更高水平的生活方式，积累更多的财富。适合收入较高、不愿意降低生活品质，但希望获得财务自由的人。</p>
+            </div>
+
+            <div class="fire-card">
+                <h3>🏖️ Coast FIRE</h3>
+                <p>海岸FIRE，积累足够在正常退休年龄实现退休的资产，然后" coast"（滑行）——继续工作但只为覆盖当前生活开销，不再需要为退休储蓄。</p>
+            </div>
+
+            <div class="fire-card">
+                <h3>☕ Barista FIRE</h3>
+                <p>半退休FIRE，积累足够资产后辞职从事兼职工作（如咖啡师），用兼职收入+投资收益来维持生活，实现"部分退休"。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 计算器 -->
+    <section class="section" id="calculator">
+        <h2 class="section-title">FIRE 计算器</h2>
+        <p class="section-subtitle">输入你的财务数据，计算通往自由的距离</p>
+
+        <div class="calculator-section">
+            <div class="calc-tabs">
+                <button class="calc-tab active" onclick="switchTab('fire')">FIRE计算器</button>
+                <button class="calc-tab" onclick="switchTab('cost')">生活成本</button>
+                <button class="calc-tab" onclick="switchTab('budget')">月度预算</button>
+            </div>
+
+            <!-- FIRE计算器 -->
+            <div class="calc-form active" id="fire-calc">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>当前年龄</label>
+                        <input type="number" id="currentAge" value="30" min="18" max="80">
+                    </div>
+                    <div class="form-group">
+                        <label>目标退休年龄</label>
+                        <input type="number" id="targetAge" value="45" min="20" max="80">
+                    </div>
+                    <div class="form-group">
+                        <label>当前储蓄 (¥)</label>
+                        <input type="number" id="currentSavings" value="100000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>税后年收入 (¥)</label>
+                        <input type="number" id="annualIncome" value="200000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>年支出 (¥)</label>
+                        <input type="number" id="annualExpenses" value="120000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>预期年投资收益率 (%)</label>
+                        <input type="number" id="returnRate" value="7" min="0" max="20" step="0.1">
+                    </div>
+                </div>
+                <button class="calculate-btn" onclick="calculateFIRE()">计算 FIRE 数字</button>
+
+                <div class="result-box" id="fire-result">
+                    <h3 class="result-title">🎯 你的 FIRE 分析结果</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-value" id="fireNumber">-</div>
+                            <div class="result-label">FIRE数字</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="monthlySave">-</div>
+                            <div class="result-label">每月需储蓄</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="yearsToFire">-</div>
+                            <div class="result-label">预计FIRE年龄</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="savingsRate">-</div>
+                            <div class="result-label">储蓄率</div>
+                        </div>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>FIRE进度</span>
+                            <span id="progressPercent">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 生活成本计算器 -->
+            <div class="calc-form" id="cost-calc">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>住房 (房贷/租金)</label>
+                        <input type="number" id="costHouse" value="3000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>食物 & 日用品</label>
+                        <input type="number" id="costFood" value="1500" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>交通</label>
+                        <input type="number" id="costTransport" value="500" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>医疗 & 保险</label>
+                        <input type="number" id="costMedical" value="300" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>娱乐 & 社交</label>
+                        <input type="number" id="costEntertainment" value="500" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>其他支出</label>
+                        <input type="number" id="costOther" value="200" min="0">
+                    </div>
+                </div>
+                <button class="calculate-btn" onclick="calculateCost()">计算月支出</button>
+
+                <div class="result-box" id="cost-result">
+                    <h3 class="result-title">📊 月度支出分析</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-value" id="totalMonthly">-</div>
+                            <div class="result-label">月总支出</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="annualTotal">-</div>
+                            <div class="result-label">年总支出</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="fireTargetAmount">-</div>
+                            <div class="result-label">FIRE所需资产</div>
+                        </div>
+                    </div>
+                    <div class="budget-chart" id="costChart"></div>
+                    <table class="cost-table" id="costTable"></table>
+                </div>
+            </div>
+
+            <!-- 月度预算 -->
+            <div class="calc-form" id="budget-calc">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>月收入 (¥)</label>
+                        <input type="number" id="budgetIncome" value="16667" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>FIRE储蓄比例 (%)</label>
+                        <input type="number" id="fireRatio" value="50" min="0" max="100">
+                    </div>
+                </div>
+                <button class="calculate-btn" onclick="calculateBudget()">生成分配方案</button>
+
+                <div class="result-box" id="budget-result">
+                    <h3 class="result-title">💰 月度预算分配</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-value" id="budgetFire">-</div>
+                            <div class="result-label">FIRE储蓄</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="budgetLife">-</div>
+                            <div class="result-label">生活支出</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" id="budgetEmergency">-</div>
+                            <div class="result-label">应急储备</div>
+                        </div>
+                    </div>
+                    <div class="budget-chart" id="budgetChart"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心原则 -->
+    <section class="section" id="principles">
+        <h2 class="section-title">FIRE 核心原则</h2>
+        <p class="section-subtitle">通往财务自由的四大支柱</p>
+
+        <div class="principles">
+            <div class="principle-card">
+                <div class="principle-icon">💰</div>
+                <h3>高储蓄率</h3>
+                <p>FIRE的核心是储蓄而非收入。建议储蓄率达到50%以上，让复利为你工作。</p>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">📈</div>
+                <h3>明智投资</h3>
+                <p>低成本的指数基金是FIRE的首选。采用多元化投资策略，让时间成为你的朋友。</p>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">🎯</div>
+                <h3>极简生活</h3>
+                <p>减少不必要的消费，把资源集中在真正重要的事物上。简约不是苦行，而是选择。</p>
+            </div>
+
+            <div class="principle-card">
+                <div class="principle-icon">🧠</div>
+                <h3>持续学习</h3>
+                <p>财务知识是终身的功课。理解金钱的运作方式，才能更好地掌控人生。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动呼吁 -->
+    <section class="section">
+        <div class="cta-section">
+            <h2>你的FIRE之旅，从今天开始</h2>
+            <p>不要等到明天，现在就开始规划你的财务自由之路。</p>
+            <a href="#calculator" class="cta-button">立即计算</a>
+        </div>
+    </section>
+
+    <!-- 资源 -->
+    <section class="section" id="resources">
+        <h2 class="section-title">FIRE 学习资源</h2>
+        <p class="section-subtitle">推荐阅读与工具</p>
+
+        <div class="resource-list">
+            <div class="resource-item">
+                <div class="resource-info">
+                    <span class="resource-icon">📚</span>
+                    <div>
+                        <div class="resource-name">《钱：7步创造终身收入》</div>
+                        <div class="resource-desc">托尼·罗宾斯 | 财务自由的实践指南</div>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-info">
+                    <span class="resource-icon">📚</span>
+                    <div>
+                        <div class="resource-name">《富爸爸穷爸爸》</div>
+                        <div class="resource-desc">罗伯特·清崎 | 财商启蒙经典</div>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-info">
+                    <span class="resource-icon">📚</span>
+                    <div>
+                        <div class="resource-name">《指数基金投资指南》</div>
+                        <div class="resource-desc">银行螺丝钉 | A股指数基金实战</div>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-info">
+                    <span class="resource-icon">🌐</span>
+                    <div>
+                        <div class="resource-name">r/financialindependence</div>
+                        <div class="resource-desc">Reddit FIRE社区 | 英文最大的FIRE讨论区</div>
+                    </div>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="resource-info">
+                    <span class="resource-icon">📊</span>
+                    <div>
+                        <div class="resource-name">复利计算器</div>
+                        <div class="resource-desc">计算时间带来的财富增长</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>YanFire — 推广FIRE理念，探索财务自由</p>
+        <div class="built-by">
+            由 <a href="#">李成岩</a> 搭建 | 基于 <a href="https://nic.eu.org" target="_blank">EU.org</a> 免费域名
+        </div>
+    </footer>
+
+    <script>
+        // 切换标签页
+        function switchTab(tab) {
+            document.querySelectorAll('.calc-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.calc-form').forEach(f => f.classList.remove('active'));
+
+            event.target.classList.add('active');
+
+            if (tab === 'fire') {
+                document.getElementById('fire-calc').classList.add('active');
+            } else if (tab === 'cost') {
+                document.getElementById('cost-calc').classList.add('active');
+            } else if (tab === 'budget') {
+                document.getElementById('budget-calc').classList.add('active');
+            }
+        }
+
+        // 格式化货币
+        function formatCurrency(num) {
+            return '¥' + Math.round(num).toLocaleString('zh-CN');
+        }
+
+        // FIRE计算
+        function calculateFIRE() {
+            const currentAge = parseInt(document.getElementById('currentAge').value) || 30;
+            const targetAge = parseInt(document.getElementById('targetAge').value) || 45;
+            const currentSavings = parseFloat(document.getElementById('currentSavings').value) || 100000;
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 200000;
+            const annualExpenses = parseFloat(document.getElementById('annualExpenses').value) || 120000;
+            const returnRate = parseFloat(document.getElementById('returnRate').value) / 100 || 0.07;
+
+            // FIRE数字 = 年支出 × 25
+            const fireNumber = annualExpenses * 25;
+
+            // 储蓄率
+            const savingsRate = ((annualIncome - annualExpenses) / annualIncome * 100).toFixed(1);
+
+            // 每月需储蓄
+            const annualSavings = annualIncome - annualExpenses;
+            const monthlySave = annualSavings / 12;
+
+            // 复利计算到达FIRE的年数
+            let years = 0;
+            let balance = currentSavings;
+            const monthlyRate = returnRate / 12;
+
+            while (balance < fireNumber && years < 100) {
+                balance = balance * (1 + monthlyRate * 12) + annualSavings;
+                years++;
+            }
+
+            const fireAge = currentAge + years;
+
+            // 更新UI
+            document.getElementById('fireNumber').textContent = formatCurrency(fireNumber);
+            document.getElementById('monthlySave').textContent = formatCurrency(monthlySave);
+            document.getElementById('yearsToFire').textContent = fireAge + ' 岁';
+            document.getElementById('savingsRate').textContent = savingsRate + '%';
+
+            // 进度条
+            const progress = Math.min((currentSavings / fireNumber * 100), 100).toFixed(1);
+            document.getElementById('progressPercent').textContent = progress + '%';
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            document.getElementById('fire-result').classList.add('show');
+        }
+
+        // 生活成本计算
+        function calculateCost() {
+            const costs = {
+                '住房': parseFloat(document.getElementById('costHouse').value) || 0,
+                '食物': parseFloat(document.getElementById('costFood').value) || 0,
+                '交通': parseFloat(document.getElementById('costTransport').value) || 0,
+                '医疗': parseFloat(document.getElementById('costMedical').value) || 0,
+                '娱乐': parseFloat(document.getElementById('costEntertainment').value) || 0,
+                '其他': parseFloat(document.getElementById('costOther').value) || 0
+            };
+
+            const totalMonthly = Object.values(costs).reduce((a, b) => a + b, 0);
+            const annualTotal = totalMonthly * 12;
+            const fireTarget = annualTotal * 25;
+
+            document.getElementById('totalMonthly').textContent = formatCurrency(totalMonthly);
+            document.getElementById('annualTotal').textContent = formatCurrency(annualTotal);
+            document.getElementById('fireTargetAmount').textContent = formatCurrency(fireTarget);
+
+            // 绘制图表
+            const chart = document.getElementById('costChart');
+            const maxValue = Math.max(...Object.values(costs));
+            chart.innerHTML = Object.entries(costs).map(([name, value]) => {
+                const height = maxValue > 0 ? (value / maxValue * 100) : 0;
+                return `<div class="budget-bar" style="height: ${height}%" data-label="${name}"></div>`;
+            }).join('');
+
+            // 绘制表格
+            const table = document.getElementById('costTable');
+            table.innerHTML = `
+                <tr>
+                    <th>支出类别</th>
+                    <th>金额</th>
+                </tr>
+                ${Object.entries(costs).map(([name, value]) => `
+                    <tr>
+                        <td>${name}</td>
+                        <td>${formatCurrency(value)}</td>
+                    </tr>
+                `).join('')}
+                <tr style="font-weight: bold; color: var(--primary);">
+                    <td>总计</td>
+                    <td>${formatCurrency(totalMonthly)}/月</td>
+                </tr>
+            `;
+
+            document.getElementById('cost-result').classList.add('show');
+        }
+
+        // 预算分配
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('budgetIncome').value) || 16667;
+            const fireRatio = parseFloat(document.getElementById('fireRatio').value) || 50;
+
+            const fireSave = income * fireRatio / 100;
+            const lifeExpense = income * 0.4;
+            const emergency = income * (100 - fireRatio - 40) / 100;
+
+            document.getElementById('budgetFire').textContent = formatCurrency(fireSave);
+            document.getElementById('budgetLife').textContent = formatCurrency(lifeExpense);
+            document.getElementById('budgetEmergency').textContent = formatCurrency(Math.max(emergency, 0));
+
+            // 绘制图表
+            const chart = document.getElementById('budgetChart');
+            chart.innerHTML = `
+                <div class="budget-bar" style="height: ${fireRatio}%" data-label="FIRE"></div>
+                <div class="budget-bar" style="height: 40%" data-label="生活"></div>
+                <div class="budget-bar" style="height: ${Math.max(100 - fireRatio - 40, 0)}%" data-label="应急"></div>
+            `;
+
+            document.getElementById('budget-result').classList.add('show');
+        }
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
